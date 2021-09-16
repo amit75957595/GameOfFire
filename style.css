@@ -1,0 +1,195 @@
+@font-face {
+  font-family: debug;
+  src: url(font/DebugFreeTrial-MVdYB.otf);
+}
+body {
+  font-family: debug;
+}
+
+.game-bg {
+  background-image: url(images/bg-animal.jpg);
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+.welcome-heading {
+  color: #ff9b0e;
+  font-size: 40px;
+  transition: transform 3s linear;
+  animation: name 5s infinite;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 230px;
+  text-align: center;
+}
+@keyframes name {
+  0% {
+    font-size: 0px;
+  }
+  50% {
+    bottom: 50px;
+    font-size: 40px;
+  }
+  100% {
+    color: transparent;
+    bottom: 0;
+  }
+}
+.heading-parent {
+  height: 90vh;
+  width: 100vw;
+}
+.countinue-button {
+  height: 20vh;
+}
+
+.name_question_popup .modal-content {
+  /* clip-path: polygon(
+    0% 15%,
+    77% 15%,
+    100% 0%,
+    100% 80%,
+    80% 100%,
+    15% 100%,
+    0% 76%,
+    0% 13%
+  ); */
+  /* clip-path: polygon( 0% 15%, 77% 15%, 100% 0%, 100% 77%, 82% 100%, 16% 100%, 70% 92%, -3% 90% ); */
+  clip-path: polygon(
+    0% 15%,
+    77% 15%,
+    100% 0%,
+    100% 80%,
+    80% 100%,
+    16% 100%,
+    70% 92%,
+    1% 100%
+  );
+  background-image: linear-gradient(
+    to bottom right,
+    hsl(30deg 100% 53% / 19%),
+    #f70f2e,
+    hsl(228deg 21% 24% / 17%)
+  );
+  color: #fff;
+  padding: 48px 76px;
+  background-color: unset !important;
+}
+.modal-content .modal-header button span {
+  color: #fff;
+}
+.close {
+  font-family: sans-serif;
+}
+.modal-content .modal-header,
+.modal-content .modal-footer {
+  border: none;
+}
+.name_question_popup .modal-content .modal-body .name-input {
+  border: none;
+  outline: none;
+  border-bottom: 3px solid #fe9812;
+  background: none;
+  color: #fff;
+}
+.name_question_popup {
+  border-top: 7px solid #e27715;
+  border-bottom: 7px solid #e27715;
+}
+.custom-modal-design .modal-content {
+  background-image: linear-gradient(
+    to bottom right,
+    hsl(30deg 100% 53% / 19%),
+    #f70f2e,
+    hsl(228deg 21% 24% / 17%)
+  );
+  color: #fff;
+  padding: 6px 8px;
+  background-color: unset !important;
+  height: 80vh;
+  flex-direction: column;
+}
+.custom-modal-design .modal-content .modal-body {
+  overflow-y: auto;
+}
+
+.custom-modal-design .modal-content .modal-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* .custom-modal-design .modal-content .modal-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+} */
+
+.custom-modal-design .modal-content .modal-body::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 40px;
+}
+
+.custom-modal-design .modal-content .modal-body::-webkit-scrollbar-thumb:hover {
+  background: #ff9b0e;
+}
+.custom-modal-design .modal-content button.btn.level-button {
+  font-size: 30px;
+  background: #ff9b0e;
+  color: #fff;
+  line-height: 0;
+  height: 50px;
+  padding: 0;
+  border-radius: 23%;
+  width: 50px;
+}
+.custom-modal-design .modal-content .modal-header {
+  padding: 0 10px;
+}
+.custom-modal-design .modal-content .modal-header .modal-title,
+.custom-modal-design .modal-content .modal-footer p {
+  font-size: 30px;
+}
+#game_viewport .custom-modal-design {
+  margin: 0 auto;
+  height: 100vh;
+}
+#game_viewport .custom-modal-design .modal-content .modal-body .gun-design {
+  height: 35px;
+  width: 20px;
+  background-image: url(../images/Jahaaaaaaj.png);
+  position: absolute;
+  bottom: 0px;
+  background-position: center;
+  right: 0;
+  overflow: hidden;
+  background-size: cover;
+  z-index: 999;
+}
+.bullet {
+  height: 13px;
+  width: 5px;
+  background: #fff;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 13px;
+  right: 8px;
+  transition: bottom 3s linear;
+  z-index: 1;
+  transform: translateY(0%);
+}
+.bullet.active {
+  bottom: 100%;
+}
+.ballon {
+  position: relative;
+  margin: 5px;
+  z-index: 99999;
+  height: 50px;
+  width: 50px;
+  background-color: #e27715;
+  border-radius: 50%;
+}
+#timer {
+  font-size: 100px;
+}

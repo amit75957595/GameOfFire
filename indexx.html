@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Ballon Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="game-bg">
+        <div class="d-flex justify-content-end mr-5 align-items-center countinue-button">
+            <button id="warning_accept" class="btn btn-danger">I will do</button>
+        </div>
+        <div class=" heading-parent position-relative">
+            <h1 id="welcome_warning" class="welcome-heading">I warn you Dont pop the ballons...</h1>
+        </div>
+    </section>
+
+
+    <div class="modal fade" id="name_model" tabindex="-1" role="dialog" data-backdrop="static"
+        labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered name_question_popup" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Please enter your name to countinue</h5>
+                    <button id="modal_close" onclick="location.reload();" type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="myForm">
+                    <div class="modal-body">
+                        <label class="d-block">
+                            <span class="d-block">Enter your name</span>
+                            <input id="name" data-container="body" data-toggle="popover" data-placement="left"
+                                data-content="Please enter name." class="d-block w-100 name-input" type="text">
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                        <button id="name_countinue" type="submit" class="btn btn-danger">Countinue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="levels_modal" tabindex="-1" role="dialog" data-backdrop="static"
+        labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-modal-design" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="user_name"></h5>
+                    <button id="modal_close" onclick="location.reload();" type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body flex-fill">
+                    <button onclick="playGame(1)" class="btn level-button">1</button>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <p id="score_elem"></p>
+                    <button type="button" onclick="location.reload();" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="game_viewport" tabindex="-1" role="dialog" data-backdrop="static"
+        labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered custom-modal-design" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="level_number">Levels</h5>
+                    <button id="modal_close" onclick="location.reload();" type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="game_area" class="modal-body flex-fill position-relative">
+                    <div id="ballons" class="d-flex justify-content-start align-content-center flex-wrap">
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                        <div class="ballon"></div>
+                    </div>
+                    <div id="gun" class="gun-design"></div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <p id="total_score"></p>
+                    <button type="button" onclick="location.reload();" class="btn btn-danger">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+<script>
+
+    document.onkeydown = detectKey;
+    var pos = 0;
+    var bullet_id = 0;
+    var count = 0;
+
+    function detectKey(e) {
+
+        var gun = document.getElementById("gun");
+
+        if (e.keyCode == 37 && pos < 450) {
+            pos = pos + 30;
+            gun.style.right = pos + "px";
+            console.log(pos);
+        }
+        if (e.keyCode == 39 && pos > 0) {
+            pos = pos - 30;
+            gun.style.right = pos + "px";
+            console.log(pos);
+        }
+
+        if (e.keyCode == 32) {
+            console.log(pos);
+
+            bullet_id = bullet_id + 1;
+            var div = document.createElement("DIV");
+            div.id = bullet_id;
+            div.classList.add('bullet');
+
+            document.getElementById("game_area").appendChild(div);
+
+            var bullet = document.getElementById(bullet_id);
+
+            bullet.style.right = pos + 8 + "px";
+            setTimeout(function () {
+                div.classList.add('active');
+            }, 10);
+            setTimeout(function () {
+                div.remove();
+            }, 3000);
+
+        }
+
+    }
+
+    var wlc_heading = document.getElementById("welcome_warning");
+    var warning_accept = document.getElementById("warning_accept");
+    var name_countinue = document.getElementById("name_countinue");
+
+    var name = "";
+    var score = 0;
+
+    var player = { name: name, score: score };
+    function playGame(number) {
+        $('#levels_modal').modal('hide');
+
+        document.getElementById("level_number").innerHTML = "Level  " + number;
+        document.getElementById("total_score").innerHTML = "Score  " + number;
+
+
+        setTimeout(function () {
+            $('#game_viewport').modal('show');
+        }, 1000)
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        warning_accept.addEventListener("click", function () {
+            warning_accept.parentElement.style.cssText = "display:none !important;";
+            wlc_heading.style.animation = "unset";
+            setTimeout(function () {
+                wlc_heading.style.cssText = "transform:translateY(100%); animation:unset; display:none;";
+                wlc_heading.parentElement.style.cssText = "display:none !important;";
+            }, 1000);
+
+            $('#name_model').modal('show');
+
+            $('#name_model').on('shown.bs.modal', function (e) {
+                document.getElementById("name").focus();
+            });
+
+
+        });
+
+        var myform = document.getElementById('myForm');
+
+        myform.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var name_countinue = document.getElementById("name").value;
+            name = name_countinue;
+
+            if (name == "") {
+                $("#name").popover('show');
+                setTimeout(function () {
+                    $("#name").popover('hide');
+                }, 3000);
+            } else {
+                player = { name: name, score: score };
+                $('#name_model').modal('hide');
+                // document.getElementById("name_modal").modal('hide');
+                setTimeout(function () {
+                    document.getElementById("user_name").innerHTML = player.name;
+                    document.getElementById("score_elem").innerHTML = "Score " + player.score;
+                    $('#levels_modal').modal('show');
+
+
+                }, 1000)
+            }
+
+        });
+
+
+
+
+
+        // bootstrap components code-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+    });
+
+
+</script>
+
+</html>
