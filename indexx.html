@@ -90,23 +90,7 @@
                 </div>
                 <div id="game_area" class="modal-body flex-fill position-relative">
                     <div id="ballons" class="d-flex justify-content-start align-content-center flex-wrap">
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
-                        <div class="ballon"></div>
+                        
                     </div>
                     <div id="gun" class="gun-design"></div>
                 </div>
@@ -147,16 +131,13 @@
         if (e.keyCode == 37 && pos < 450) {
             pos = pos + 30;
             gun.style.right = pos + "px";
-            console.log(pos);
         }
         if (e.keyCode == 39 && pos > 0) {
             pos = pos - 30;
             gun.style.right = pos + "px";
-            console.log(pos);
         }
 
         if (e.keyCode == 32) {
-            console.log(pos);
 
             bullet_id = bullet_id + 1;
             var div = document.createElement("DIV");
@@ -175,6 +156,10 @@
                 div.remove();
             }, 3000);
 
+
+
+
+
         }
 
     }
@@ -187,18 +172,24 @@
     var score = 0;
 
     var player = { name: name, score: score };
+
+
     function playGame(number) {
         $('#levels_modal').modal('hide');
 
         document.getElementById("level_number").innerHTML = "Level  " + number;
         document.getElementById("total_score").innerHTML = "Score  " + number;
-
-
+        var ballons_number = number * 10;        
+        for(var i = 1; i <= ballons_number; i++){
+            document.getElementById("ballons").innerHTML += "<div id='ballon_" + i +"' class='ballon'></div>";
+        }
         setTimeout(function () {
             $('#game_viewport').modal('show');
-        }, 1000)
+        }, 1000);
 
     }
+
+
 
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -254,6 +245,18 @@
 
 
     });
+
+
+
+// class add
+// class remove
+// attribute add
+// attribute remove
+// append html
+// innerhtml
+// addeventlistener
+// style
+// cssText
 
 
 </script>
