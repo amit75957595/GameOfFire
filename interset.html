@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,78 +8,124 @@
     <title>interset</title>
 </head>
 <style>
-    #function_div {
-    height: 500px;
-    color: red;
-    border: 2px solid red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-select option {
-    position: relative;
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        padding: 30px;
+        color: #444;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    #area {
+        border: 2px solid gray;
+        width: 500px;
+        height: 400px;
+        position: relative;
+    }
+
+    #area>div {
+        background-color: rgba(122, 122, 122, 0.3);
+        position: absolute;
+        text-align: center;
+        font-size: 50px;
+        width: 60px;
+        height: 60px;
+    }
+
+    #box0 {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+    top: 260px;
+    left: 50px;
 }
 
+    #box1 {
+        top: 260px;
+        left: 50px;
+    }
+
+    #box2 {
+        top: 110px;
+        left: 160px;
+    }
+
+    #box3 {
+        top: 200px;
+        left: 200px;
+    }
+
+    #box4 {
+        top: 50px;
+        left: 400px;
+    }
+
+    p {
+        margin: 5px 0;
+    }
 </style>
+
 <body>
-    <div id="roott">
-     
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        
-        <div id="function_div">asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </div>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
-        
-        <h1>asdfsadfsdfsdafsdfsdafsafasdfasdfasdfasdfasdfas sdfasdfsadfsadfsadfasdfasdfas  sd s as dfsd fdsa dsaf sad fads dsafdsa fdsds afdsa fds fdsafsadf sda sd afsd afs adf sdfsdc fsd afdsaf adsf </h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <h1>Detect overlapping with JavaScript</h1>
+    <div id="area">
+        <div id="box0"></div>
+        <div id="box1">1</div>
+        <div id="box2">2</div>
+        <div id="box3">3</div>
+        <div id="box4">4</div>
     </div>
 
 
-    <script>
-        var roott = document.getElementById("roott");
-        let options = {
-            root: roott,
-            rootMargin: '0px',  
-            threshold:0
-        }
 
-        let target = document.getElementById("function_div");
-        
-       
-        let callback = (entries, observer) => {
-            
-            entries.forEach(entry =>{
-                if(entry.isIntersecting){
-                    console.log(entry.rootBounds);
-                    document.querySelector("body").style.cssText = "background-color:red; color:#fff;";
-                }
-                if(!entry.isIntersecting){
-                    document.querySelector("body").style.cssText = "background-color:#fff; color:#000;";
-                }
-            });
-        };
-        
-        let observer = new IntersectionObserver(callback,options);
-        observer.observe(target);
-        
+
+    <script>
+        var overlaps = (function () {
+            function getPositions(elem) {
+                var pos, width, height;
+                pos = $(elem).position();
+                width = $(elem).width();
+                height = $(elem).height();
+                return [[pos.left, pos.left + width], [pos.top, pos.top + height]];
+            }
+
+            function comparePositions(p1, p2) {
+                var r1, r2;
+                r1 = p1[0] < p2[0] ? p1 : p2;
+                console.log(r1);
+                r2 = p1[0] < p2[0] ? p2 : p1;
+                return r1[1] > r2[0] || r1[0] === r2[0];
+            }
+
+            return function (a, b) {
+                var pos1 = getPositions(a),
+                    pos2 = getPositions(b);
+                return comparePositions(pos1[0], pos2[0]) && comparePositions(pos1[1], pos2[1]);
+            };
+        })();
+
+        $(function () {
+            var area = $('#area')[0],
+                box = $('#box0')[0],
+                html;
+
+            html = $(area).children().not(box).map(function (i) {
+                return '<p>Red box + Box ' + (i + 1) + ' = ' + overlaps(box, this) + '</p>';
+            }).get().join('');
+
+            $('body').append(html);
+        });
+
+        function detectOverlapping() {
+            setInterval(detectOverlapping, 25);
+        }
+        detectOverlapping();
     </script>
 </body>
+
 </html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sidebar</title>
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- <input type="checkbox" id="check" />
+    <div class="animated-icons">
+        <label for="check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
+    <section class="sidebar">
+        <div class="sidebar-bg">
+
+
+            <div class="sidebar-custom-bg">
+                <p>Sidebar</p>
+            </div>
+            <div class="sidebar_matter">
+                <a href="#">Dashboard</a>
+                <a href="#">Chat</a>
+                <a href="#">Teams</a>
+                <a href="#">Tasks</a>
+                <a href="#">Games</a>
+                <a href="#">Analytics</a>
+
+            </div>
+        </div>
+    </section> -->
+
+    <section>
+        <ul ></ul>
+        <select class="showNames" name="" id="">
+            <option value="" disabled>Please select a name</option>
+        </select>
+
+        <div>
+            <h1 class="name"></h1>
+        </div>
+    </section>
+
+
+    <script>
+        var arr = [
+            {
+                name: "amit",
+                age: 23,
+                education: {
+                    school: {
+                        10: "pseb",
+                        12: "cbse",
+                    },
+                    collage: {
+                        diploma: "gne",
+                        graduation: "punjab university"
+                    }
+
+                }
+            },
+            {
+                name: "arjun",
+                age: 21,
+                education: {
+                    school: {
+                        10: "cbse",
+                        12: "cbse",
+                    },
+                    collage: {
+                        graduation: "GNDU"
+                    }
+
+                }
+            },
+            {
+                name: "shubham",
+                age: 21,
+                education: {
+                    school: {
+                        10: "cbse",
+                        12: "pseb",
+                    },
+                    collage: {
+                        iti: "MTU",
+                        graduation: "GNDU"
+                    }
+
+                }
+            }
+        ];
+
+        let select = document.querySelector('.showNames');
+        let str = ``;
+        let showname;
+        let showage;
+
+        // console.log(arr[0]);
+
+        window.addEventListener('DOMContentLoaded',()=>{
+
+            for(let i=0;i<arr.length;i++) 
+            {   
+                str +=
+                `
+                <option>${arr[i].name}</option>
+                `;
+            }
+
+            select.innerHTML += str;
+
+            select.addEventListener("change",(e)=>{
+            let name = document.querySelector('.name');
+            let age = document.querySelector('.age');
+
+            // name.innerHTML = showname;
+
+            for(let i=0;i<arr.length;i++) 
+            {   
+                // console.log("name : " + arr[i].name);
+                // console.log("age : " + arr[i].age);
+                // console.log(arr[i].education);
+
+                for(let j in arr[i].education)
+                {
+                    for(let x in arr[i].education[j])
+                    {
+                        // console.log("education school " +arr[i].education[j][x]);
+                    }
+                    
+                }
+            }
+            
+            });
+        });
+
+    </script>
+</body>
+
+</html>
