@@ -96,14 +96,12 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <p id="total_score"></p>
+                    <p id="total_score">score 0</p>
                     <button type="button" onclick="location.reload();" class="btn btn-danger">Exit</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 
 
@@ -116,6 +114,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+<script src="node_modules/intersect-rect/intersect-rect.js"></script>
 
 <script>
 
@@ -124,43 +123,73 @@
     var bullet_id = 0;
     var count = 0;
 
+
+    var game_viewport = document.getElementById("game_viewport");
+
+
     function detectKey(e) {
+        var modal_check = game_viewport.getAttribute("aria-modal");
 
-        var gun = document.getElementById("gun");
+        if (modal_check == "true") {
 
-        if (e.keyCode == 37 && pos < 450) {
-            pos = pos + 30;
-            gun.style.right = pos + "px";
+            var ballons_position = document.querySelectorAll(".ballon");
+
+
+            var gun = document.getElementById("gun");
+
+            if (e.keyCode == 37 && pos < 450) {
+                pos = pos + 30;
+                gun.style.right = pos + "px";
+            }
+            if (e.keyCode == 39 && pos > 0) {
+                pos = pos - 30;
+                gun.style.right = pos + "px";
+            }
+
+            if (e.keyCode == 32) {
+
+                bullet_id = bullet_id + 1;
+                var div = document.createElement("DIV");
+                div.id = bullet_id;
+                div.classList.add('bullet');
+
+                document.getElementById("game_area").appendChild(div);
+
+                var bullet = document.getElementById(bullet_id);
+
+                bullet.style.right = pos + 8 + "px";
+                setTimeout(function () {
+
+                    div.classList.add('active');
+                }, 10);
+
+                setTimeout(function () {
+                    div.remove();
+                    clearInterval(uu);
+                }, 3000);
+
+                let uu = setInterval(function () {
+                    for (var i = 0; i < ballons_position.length; i++) {
+
+                        var ballonPos = ballons_position[i].getBoundingClientRect();
+                        var bulletPos = bullet.getBoundingClientRect();
+
+                        if (intersectRect(ballonPos, bulletPos)) {
+                            score = score + 1;
+                            player = { name: name, score: score }
+                            console.log('khtam tata byby');
+                            bullet.style.display = "none";
+                            ballons_position[i].style.visibility = "hidden";
+                            document.getElementById("total_score").innerHTML = "Score " + player.score;
+                            document.getElementById("score_elem").innerHTML = "Score " + player.score;
+                        }
+                    }
+                }, 200);
+
+            }
+
         }
-        if (e.keyCode == 39 && pos > 0) {
-            pos = pos - 30;
-            gun.style.right = pos + "px";
-        }
 
-        if (e.keyCode == 32) {
-
-            bullet_id = bullet_id + 1;
-            var div = document.createElement("DIV");
-            div.id = bullet_id;
-            div.classList.add('bullet');
-
-            document.getElementById("game_area").appendChild(div);
-
-            var bullet = document.getElementById(bullet_id);
-
-            bullet.style.right = pos + 8 + "px";
-            setTimeout(function () {
-                div.classList.add('active');
-            }, 10);
-            setTimeout(function () {
-                div.remove();
-            }, 3000);
-
-
-
-
-
-        }
 
     }
 
@@ -178,61 +207,16 @@
         $('#levels_modal').modal('hide');
 
         document.getElementById("level_number").innerHTML = "Level  " + number;
-        document.getElementById("total_score").innerHTML = "Score  " + number;
+
         var ballons_number = number * 10;
         for (var i = 1; i <= ballons_number; i++) {
-            document.getElementById("ballons").innerHTML += "<div id='ballon_" + i + "' class='ballon'></div>";
+            document.getElementById("ballons").innerHTML += "<div id='ballon_" + i + "' class='ballon'> " + i + "</div>";
         }
         setTimeout(function () {
             $('#game_viewport').modal('show');
         }, 1000);
 
     }
-
-
-
-    var overlaps = (function () {
-        function getPositions(elem) {
-            var pos, width, height;
-            pos = $(elem).position();
-            width = $(elem).width();
-            height = $(elem).height();
-            return [[pos.left, pos.left + width], [pos.top, pos.top + height]];
-        }
-
-        function comparePositions(p1, p2) {
-            var r1, r2;
-            r1 = p1[0] < p2[0] ? p1 : p2;
-            r2 = p1[0] < p2[0] ? p2 : p1;
-            return r1[1] > r2[0] || r1[0] === r2[0];
-        }
-
-        return function (a, b) {
-            var pos1 = getPositions(a),
-                pos2 = getPositions(b);
-            return comparePositions(pos1[0], pos2[0]) && comparePositions(pos1[1], pos2[1]);
-        };
-    })();
-
-    $(function () {
-        var area = $('#area')[0],
-            box = $('#box0')[0],
-            html;
-
-        html = $(area).children().not(box).map(function (i) {
-            return '<p>Red box + Box ' + (i + 1) + ' = ' + overlaps(box, this) + '</p>';
-        }).get().join('');
-
-        $('body').append(html);
-    });
-
-
-    function detectOverlapping() {
-        setInterval(detectOverlapping, 25);
-    }
-
-    detectOverlapping();
-
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -250,15 +234,13 @@
             $('#name_model').on('shown.bs.modal', function (e) {
                 document.getElementById("name").focus();
             });
-
-
         });
 
         var myform = document.getElementById('myForm');
 
         myform.addEventListener("submit", function (e) {
             e.preventDefault();
-            var name_countinue = document.getElementById("name").value;
+            var name_countinue = document.getElementById("name").value.trim();
             name = name_countinue;
 
             if (name == "") {
@@ -274,19 +256,12 @@
                     document.getElementById("user_name").innerHTML = player.name;
                     document.getElementById("score_elem").innerHTML = "Score " + player.score;
                     $('#levels_modal').modal('show');
-
-
-                }, 1000)
+                }, 1000);
             }
 
         });
 
-
-
-
-
         // bootstrap components code-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
 
     });
 

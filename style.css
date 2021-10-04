@@ -168,7 +168,7 @@ body {
 }
 .bullet {
   height: 13px;
-  width: 5px;
+  width: 5px; 
   background: #fff;
   border-radius: 10px;
   position: absolute;
@@ -177,6 +177,7 @@ body {
   transition: bottom 3s linear;
   z-index: 1;
   transform: translateY(0%);
+  display:block;
 }
 .bullet.active {
   bottom: 100%;
@@ -187,7 +188,11 @@ body {
   z-index: 99999;
   height: 35px;
   width: 35px;
-  background-color: #e27715;
+  /* background-color: #e27715; */  
+  background-image: url("images/Gubara.png");
+  background-position: center;
   border-radius: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 

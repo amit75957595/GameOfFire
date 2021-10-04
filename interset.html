@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>interset</title>
+   
 </head>
 <style>
     * {
@@ -40,10 +41,10 @@
     }
 
     #box0 {
-    background-color: rgba(255, 0, 0, 0.5) !important;
-    top: 260px;
-    left: 50px;
-}
+        background-color: rgba(255, 0, 0, 0.5) !important;
+        top: 260px;
+        left: 50px;
+    }
 
     #box1 {
         top: 260px;
@@ -65,26 +66,48 @@
         left: 400px;
     }
 
-    p {
-        margin: 5px 0;
+    .boxx {
+        height: 20px;
+        width: 20px;
+        background: red;
+        margin: 10px;
+        position:absolute;
+       
+    }
+    .position-relative {
+        position: relative;
+        height:150px;
+        width:150px;
+    }
+    #elementB {
+        
+        bottom:126px;
     }
 </style>
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <h1>Detect overlapping with JavaScript</h1>
+    
+    <!-- <h1>Detect overlapping with JavaScript</h1>
     <div id="area">
         <div id="box0"></div>
         <div id="box1">1</div>
         <div id="box2">2</div>
         <div id="box3">3</div>
         <div id="box4">4</div>
+    </div> -->
+
+
+
+    <div class="position-relative">
+        <div class="boxx" id="elementA"></div>
+        <div class="boxx" id="elementB"></div>
     </div>
 
 
 
 
-    <script>
+    <!-- <script>
+
         var overlaps = (function () {
             function getPositions(elem) {
                 var pos, width, height;
@@ -97,7 +120,6 @@
             function comparePositions(p1, p2) {
                 var r1, r2;
                 r1 = p1[0] < p2[0] ? p1 : p2;
-                console.log(r1);
                 r2 = p1[0] < p2[0] ? p2 : p1;
                 return r1[1] > r2[0] || r1[0] === r2[0];
             }
@@ -125,6 +147,28 @@
             setInterval(detectOverlapping, 25);
         }
         detectOverlapping();
+    </script> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="node_modules/intersect-rect/intersect-rect.js"></script>
+    <script>
+        
+
+        var elementA = document.getElementById('elementA');
+        var elementB = document.getElementById('elementB');
+
+        var rectA = elementA.getBoundingClientRect();
+        
+        var rectB = elementB.getBoundingClientRect();
+        
+
+        if (intersectRect(rectA, rectB)) {
+            console.log('elementA and elementB overlap!');
+        } else {
+            console.log('elementA and elementB do not overlap!');
+        }
+
+
     </script>
 </body>
 

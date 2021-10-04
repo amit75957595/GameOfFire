@@ -1,0 +1,25 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "intersect-rect": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"react-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amit75957595/GameOfFire.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amit75957595/GameOfFire/issues"
+  },
+  "homepage": "https://github.com/amit75957595/GameOfFire#readme"
+}
