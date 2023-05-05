@@ -114,169 +114,193 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-<script src="node_modules/intersect-rect/intersect-rect.js"></script>
+<!-- <script src="node_modules/intersect-rect/intersect-rect.js"></script> -->
 
 <script>
 
-    document.onkeydown = detectKey;
-    var pos = 0;
-    var bullet_id = 0;
-    var count = 0;
+    // (function () {
+        function intersectRect(rectA, rectB) {
+            return !(
+                rectB.left >= rectA.right ||
+                rectB.right <= rectA.left ||
+                rectB.top >= rectA.bottom ||
+                rectB.bottom <= rectA.top
+            );
+        }
+
+        /* global define, window */
+        if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+            module.exports = intersectRect;
+        } else if (typeof define === 'function' && define.amd) {
+            define([], function () {
+                return intersectRect;
+            });
+        } else {
+            window.intersectRect = intersectRect;
+        }
 
 
-    var game_viewport = document.getElementById("game_viewport");
+        // ..........................................................
+
+        document.onkeydown = detectKey;
+        var pos = 0;
+        var bullet_id = 0;
+        var count = 0;
 
 
-    function detectKey(e) {
-        var modal_check = game_viewport.getAttribute("aria-modal");
-
-        if (modal_check == "true") {
-
-            var ballons_position = document.querySelectorAll(".ballon");
+        var game_viewport = document.getElementById("game_viewport");
 
 
-            var gun = document.getElementById("gun");
+        function detectKey(e) {
+            var modal_check = game_viewport.getAttribute("aria-modal");
 
-            if (e.keyCode == 37 && pos < 450) {
-                pos = pos + 30;
-                gun.style.right = pos + "px";
-            }
-            if (e.keyCode == 39 && pos > 0) {
-                pos = pos - 30;
-                gun.style.right = pos + "px";
-            }
+            if (modal_check == "true") {
 
-            if (e.keyCode == 32) {
+                var ballons_position = document.querySelectorAll(".ballon");
 
-                bullet_id = bullet_id + 1;
-                var div = document.createElement("DIV");
-                div.id = bullet_id;
-                div.classList.add('bullet');
 
-                document.getElementById("game_area").appendChild(div);
+                var gun = document.getElementById("gun");
 
-                var bullet = document.getElementById(bullet_id);
+                if (e.keyCode == 37 && pos < 450) {
+                    pos = pos + 30;
+                    gun.style.right = pos + "px";
+                }
+                if (e.keyCode == 39 && pos > 0) {
+                    pos = pos - 30;
+                    gun.style.right = pos + "px";
+                }
 
-                bullet.style.right = pos + 8 + "px";
-                setTimeout(function () {
+                if (e.keyCode == 32) {
 
-                    div.classList.add('active');
-                }, 10);
+                    bullet_id = bullet_id + 1;
+                    var div = document.createElement("DIV");
+                    div.id = bullet_id;
+                    div.classList.add('bullet');
 
-                setTimeout(function () {
-                    div.remove();
-                    clearInterval(uu);
-                }, 3000);
+                    document.getElementById("game_area").appendChild(div);
 
-                let uu = setInterval(function () {
-                    for (var i = 0; i < ballons_position.length; i++) {
+                    var bullet = document.getElementById(bullet_id);
 
-                        var ballonPos = ballons_position[i].getBoundingClientRect();
-                        var bulletPos = bullet.getBoundingClientRect();
+                    bullet.style.right = pos + 8 + "px";
+                    setTimeout(function () {
 
-                        if (intersectRect(ballonPos, bulletPos)) {
-                            score = score + 1;
-                            player = { name: name, score: score }
-                            console.log('khtam tata byby');
-                            bullet.style.display = "none";
-                            ballons_position[i].style.visibility = "hidden";
-                            document.getElementById("total_score").innerHTML = "Score " + player.score;
-                            document.getElementById("score_elem").innerHTML = "Score " + player.score;
+                        div.classList.add('active');
+                    }, 10);
+
+                    setTimeout(function () {
+                        div.remove();
+                        clearInterval(uu);
+                    }, 3000);
+
+                    let uu = setInterval(function () {
+                        for (var i = 0; i < ballons_position.length; i++) {
+
+                            var ballonPos = ballons_position[i].getBoundingClientRect();
+                            var bulletPos = bullet.getBoundingClientRect();
+
+                            if (intersectRect(ballonPos, bulletPos)) {
+                                score = score + 1;
+                                player = { name: name, score: score }
+                                console.log('khtam tata byby');
+                                bullet.style.display = "none";
+                                ballons_position[i].style.visibility = "hidden";
+                                document.getElementById("total_score").innerHTML = "Score " + player.score;
+                                document.getElementById("score_elem").innerHTML = "Score " + player.score;
+                            }
                         }
-                    }
-                }, 200);
+                    }, 200);
+
+                }
 
             }
 
+
         }
 
+        var wlc_heading = document.getElementById("welcome_warning");
+        var warning_accept = document.getElementById("warning_accept");
+        var name_countinue = document.getElementById("name_countinue");
 
-    }
+        var name = "";
+        var score = 0;
 
-    var wlc_heading = document.getElementById("welcome_warning");
-    var warning_accept = document.getElementById("warning_accept");
-    var name_countinue = document.getElementById("name_countinue");
-
-    var name = "";
-    var score = 0;
-
-    var player = { name: name, score: score };
+        var player = { name: name, score: score };
 
 
-    function playGame(number) {
-        $('#levels_modal').modal('hide');
+        function playGame(number) {
+            $('#levels_modal').modal('hide');
 
-        document.getElementById("level_number").innerHTML = "Level  " + number;
+            document.getElementById("level_number").innerHTML = "Level  " + number;
 
-        var ballons_number = number * 10;
-        for (var i = 1; i <= ballons_number; i++) {
-            document.getElementById("ballons").innerHTML += "<div id='ballon_" + i + "' class='ballon'> " + i + "</div>";
-        }
-        setTimeout(function () {
-            $('#game_viewport').modal('show');
-        }, 1000);
-
-    }
-
-
-    document.addEventListener("DOMContentLoaded", function () {
-
-        warning_accept.addEventListener("click", function () {
-            warning_accept.parentElement.style.cssText = "display:none !important;";
-            wlc_heading.style.animation = "unset";
+            var ballons_number = number * 10;
+            for (var i = 1; i <= ballons_number; i++) {
+                document.getElementById("ballons").innerHTML += "<div id='ballon_" + i + "' class='ballon'> " + i + "</div>";
+            }
             setTimeout(function () {
-                wlc_heading.style.cssText = "transform:translateY(100%); animation:unset; display:none;";
-                wlc_heading.parentElement.style.cssText = "display:none !important;";
+                $('#game_viewport').modal('show');
             }, 1000);
 
-            $('#name_model').modal('show');
+        }
 
-            $('#name_model').on('shown.bs.modal', function (e) {
-                document.getElementById("name").focus();
-            });
-        });
 
-        var myform = document.getElementById('myForm');
+        document.addEventListener("DOMContentLoaded", function () {
 
-        myform.addEventListener("submit", function (e) {
-            e.preventDefault();
-            var name_countinue = document.getElementById("name").value.trim();
-            name = name_countinue;
-
-            if (name == "") {
-                $("#name").popover('show');
+            warning_accept.addEventListener("click", function () {
+                warning_accept.parentElement.style.cssText = "display:none !important;";
+                wlc_heading.style.animation = "unset";
                 setTimeout(function () {
-                    $("#name").popover('hide');
-                }, 3000);
-            } else {
-                player = { name: name, score: score };
-                $('#name_model').modal('hide');
-                // document.getElementById("name_modal").modal('hide');
-                setTimeout(function () {
-                    document.getElementById("user_name").innerHTML = player.name;
-                    document.getElementById("score_elem").innerHTML = "Score " + player.score;
-                    $('#levels_modal').modal('show');
+                    wlc_heading.style.cssText = "transform:translateY(100%); animation:unset; display:none;";
+                    wlc_heading.parentElement.style.cssText = "display:none !important;";
                 }, 1000);
-            }
+
+                $('#name_model').modal('show');
+
+                $('#name_model').on('shown.bs.modal', function (e) {
+                    document.getElementById("name").focus();
+                });
+            });
+
+            var myform = document.getElementById('myForm');
+
+            myform.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var name_countinue = document.getElementById("name").value.trim();
+                name = name_countinue;
+
+                if (name == "") {
+                    $("#name").popover('show');
+                    setTimeout(function () {
+                        $("#name").popover('hide');
+                    }, 3000);
+                } else {
+                    player = { name: name, score: score };
+                    $('#name_model').modal('hide');
+                    // document.getElementById("name_modal").modal('hide');
+                    setTimeout(function () {
+                        document.getElementById("user_name").innerHTML = player.name;
+                        document.getElementById("score_elem").innerHTML = "Score " + player.score;
+                        $('#levels_modal').modal('show');
+                    }, 1000);
+                }
+
+            });
+
+            // bootstrap components code-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         });
 
-        // bootstrap components code-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-    });
 
 
-
-// class add
-// class remove
-// attribute add
-// attribute remove
-// append html
-// innerhtml
-// addeventlistener
-// style
-// cssText
-
+        // class add
+        // class remove
+        // attribute add
+        // attribute remove
+        // append html
+        // innerhtml
+        // addeventlistener
+        // style
+        // cssText
+    // })();
 
 </script>
 
